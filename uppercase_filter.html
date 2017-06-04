@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>过滤器</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <style>
+
+    </style>
+    <script src="https://cdn.bootcss.com/vue/2.3.3/vue.min.js"></script>
+    <script>
+        //过滤器
+        Vue.filter('uppercase', function(value) {
+            if (!value) { return ''}
+                value = value.toString()
+            return value.toUpperCase();
+        })
+
+        window.onload = function () {
+            new Vue({
+                el: '#box',
+                data: {
+                   msg: 'welcome vue'
+                },
+                methods: {
+                   
+                }
+            });
+       }
+    </script>
+</head>
+<body>
+    <div id="box">
+        <h5>小写字母转大写</h5>
+        <br>
+        {{msg | uppercase}}
+    </div>
+</body>
+</html>
