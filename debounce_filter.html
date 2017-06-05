@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>过滤器</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <style>
+
+    </style>
+    <!--script src="https://cdn.bootcss.com/vue/2.3.3/vue.min.js"></script-->
+    <script type="text/javascript" src="vue.js"></script>
+    <script src="lodash.min.js"></script>
+    <script>
+       window.onload = function () {
+            var vm = new Vue({
+                el: '#box',
+                data: {
+                    searchQuery: '',
+                    searchQueryIsDirty: false,
+                    isCalculating: false
+                },
+                computed: {
+                    searchIndicator: function () {
+                        if (this.isCalculating) {
+                            return '⟳ Fetching new results'
+                        } else if (this.searchQueryIsDirty) {
+                            return '... Typing'
+                        } else {
+                            return '✓ Done'
+                        }
+                    }
+                },
+                watch: {
+                    searchQuery: function () {
+                        this.searchQueryIsDirty = true
+                        this.expensiveOperation()
+                    }
+                },
+                methods: {
+                    expensiveOperation: _.debounce(function () {
+                        this.isCalculating = true
+                        setTimeout(function () {
+                        this.isCalculating = false
+                        this.searchQueryIsDirty = false
+                        }.bind(this), 1000)
+                    }, 500)
+                }
+            });
+       }
+    </script>
+</head>
+<body>
+    <div id="box">
+        <input type="text" v-model="searchQuery">
+        <strong>{{ searchIndicator }}</strong>
+    </div>
+</body>
+</html>
