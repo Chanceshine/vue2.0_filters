@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>limitBy</title>
+	<script src="vue.js"></script>
+</head>
+<body>
+	<div id="box">
+		<ul>
+			<li v-for="(val,index) in lists" :key="index">
+				{{val}}
+			</li>
+		</ul>
+	</div>
+
+	<script>
+		new Vue({
+			el:'#box',
+			data: {
+				list: [1,2,3,4,5,6,7,8,9,10]
+			},
+			computed: {
+				lists: function () {
+					return this.list.slice(1, 3);	//从下标1开始，截取到下标3
+				}
+			}
+		})
+	</script>
+</body>
+</html>
