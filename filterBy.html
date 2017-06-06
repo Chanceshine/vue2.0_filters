@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>limitBy</title>
+	<script src="vue.js"></script>
+</head>
+<body>
+	<div id="box">
+		<h1>原数组：</h1><p v-for="val in list">{{val}}</p>
+		<hr>
+		输入关键词：<input type="text" v-model="keyword">
+		<h2>结果</h2>
+		<ul>
+			<li v-for="(val,index) in filtered" :key="index" v-show="keyword">
+				{{val}}
+			</li>
+		</ul>
+	</div>
+
+	<script>
+		new Vue({
+			el:'#box',
+			data: {
+				keyword: '',
+				list: ['chance','shine','yu','cheerup']
+			},
+			computed: {
+				filtered: function () {
+					// var self = this;
+					return this.list.filter(function (list) {
+						return list.indexOf(this.keyword) !== -1
+					}.bind(this))
+				}
+			}
+		})
+	</script>
+</body>
+</html>
