@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>limitBy</title>
+	<script src="vue.js"></script>
+	<!--script src="lodash.min.js"></script-->
+	<script src="https://cdn.jsdelivr.net/lodash/4.17.4/lodash.min.js"></script>
+</head>
+<body>
+	<div id="box">
+		<h4>原数组：{{list}}</h4>
+		<p>反序</p>
+		<p>{{lists}}</p>
+		<hr>
+		<h4>对象数组:{{people}}</h4>
+		<p>姓名反序，年龄正序排序后</p>
+		<p>{{users}}</p>
+	</div>
+
+	<script>
+		new Vue({
+			el:'#box',
+			data: {
+				list: [1,2,3,4,5,6,7,8,9,10],
+				people: [
+					{ user: 'yu', age: 22 },
+					{ user: 'chance', age: 18 },
+					{ user:'shine', age: 20 }
+				]
+			},
+			computed: {
+				lists: function () {
+					return _.orderBy(this.list,[],['desc']);	//反序，默认正序（asc）
+				},
+				users: function () {
+					return _.orderBy(this.people, ['user','age'], ['desc','asc']);
+				}
+			}
+		})
+	</script>
+</body>
+</html>
